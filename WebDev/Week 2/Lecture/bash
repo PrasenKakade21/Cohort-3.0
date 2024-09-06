@@ -1,0 +1,8 @@
+# wsl - windows subsystem for linux (used to run linux commands on windows)
+pwd - print working dir
+chdir or cd [dirname] - change dir
+cd .. - go back
+dir – Lists Items in a Directory
+mkdir [dirname] - makes dir
+ver – Shows the Version of the OS
+fc [filename] [filename]– Compares Two Similar Files
