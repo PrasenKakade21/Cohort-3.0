@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+body {
+    background-color: #f9f9f9;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+    color: #333;
+}
+
+.container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 20px;
+}
+
+.container1 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    margin-bottom: 20px;
+}
+
+.form {
+    background-color: white;
+    width: 48%;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.1);
+    border: 1px solid #e0e0e0;
+}
+
+.form h2 {
+    font-size: 1.8em;
+    margin-bottom: 15px;
+    color: #1a237e;
+}
+
+.form label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #303f9f;
+}
+
+.form select,
+.form input[type="text"] {
+    width: 95%;
+    padding: 12px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1.1em;
+    background-color: #f5f5f5;
+    transition: border 0.3s ease;
+}
+
+.form select:focus,
+.form input[type="text"]:focus {
+    border: 1px solid #1a237e;
+    outline: none;
+}
+
+#formpreview {
+    border: 2px dashed #ccc;
+    padding: 20px;
+    background-color: #fafafa;
+    border-radius: 10px;
+}
+
+#formpreview h3 {
+    color: #757575;
+    font-style: italic;
+    text-align: center;
+}
+
+#forminfo {
+    background-color: #f0f4ff;
+    width: 400px;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.1);
+    border: 1px solid #e0e0e0;
+}
+
+#forminfo h2 {
+    text-align: center;
+    margin-bottom: 15px;
+    font-size: 1.8em;
+    color: #1e88e5;
+}
+
+#forminfo label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #424242;
+}
+
+#forminfo input[type="text"] {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1.1em;
+    background-color: #f5f5f5;
+    box-sizing: border-box;
+    transition: border 0.3s ease;
+}
+
+#forminfo input[type="text"]:focus {
+    border: 1px solid #1e88e5;
+    outline: none;
+}
+
+.color-group {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.color-item {
+    flex: 1;
+}
+
+.color-item input[type="color"] {
+    width: 100%;
+    height: 50px;
+    margin-top: 5px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+}
+
+.button-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+#saveBtn,
+#addBtn {
+    padding: 12px 30px;
+    background-color: #1e88e5;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1.1em;
+    transition: background-color 0.3s ease;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+#saveBtn:hover,
+#addBtn:hover {
+    background-color: #1565c0;
+}
+
+#saveBtn:active,
+#addBtn:active {
+    background-color: #0d47a1;
+    transform: scale(0.98);
+}
+
+</style>
+<body>
+
+    <div class="container1">
+    <div id="forminfo">
+        <h2>Form Details</h2>
+        <form action="" id="formdetails">
+        <label for="formName">Form Name</label>
+        <input type="text" id="formName" placeholder="Enter form name">
+        <br>
+        <div class="color-group">
+            <div class="color-item">
+                <label for="bgColor">Background Color</label>
+                <input type="color" id="bgColor">
+            </div>
+            <div class="color-item">
+                <label for="textColor">Text Color</label>
+                <input type="color" id="textColor">
+            </div>
+        </div>
+        <br>
+        <div class="button-container">
+            <button type="submit" id="saveBtn">Save</button>
+        </div>
+        </form>
+    </div>
+</div>
+<div class="container">
+    <div id="formbuilder" class="form">
+        <form action="" id="addElement">
+            <h2>Add Field</h2>
+            <label for="fieldType">Select Field Type</label>
+            <select name="fieldType" id="fieldType">
+                <option value="inputfield">Input Field</option>
+                <option value="checkbox">CheckBox</option>
+                <option value="radio">Radio Button</option>
+            </select>
+
+            <label for="fieldLabel">Field Label</label>
+            <input type="text" id="fieldLabel" placeholder="Enter Field Label">
+            <div class="button-container">
+                <button type="submit" id="addBtn">Add</button>
+            </div>
+        </form>
+    </div>
+
+    <div id="formpreview" class="form">
+        <h3 >Form Preview</h3>
+        <h2 id="formNameid"> form name</h2>
+    </div>
+
+</div>
+
+<script>
+
+document.getElementById("formdetails").addEventListener('submit', function(event){
+    event.preventDefault()
+    const parent = document.getElementById("formpreview");
+    console.log(document.getElementById("bgColor").value)
+    document.getElementById("formNameid").innerHTML = document.getElementById("formName").value;
+    parent.style.backgroundColor = document.getElementById("bgColor").value;
+    parent.style.color = document.getElementById("textColor").value;
+})
+
+
+document.getElementById("addElement").addEventListener('submit', function(event){
+    event.preventDefault()
+    const fieldtype =  document.querySelector("select").value;
+    const lable = document.getElementById("fieldLabel").value;
+
+    console.log(lable);
+    const parent = document.getElementById("formpreview");
+    const EleLable = document.createElement("lable");
+    EleLable.innerText = lable
+    const ele = document.createElement("input");
+    if(lable !== ""){
+        parent.appendChild(document.createElement('br'))
+
+    
+    switch (fieldtype) {
+        case "inputfield":
+            ele.type = 'text'
+            parent.appendChild(EleLable);
+            parent.appendChild(ele);
+            break;
+    
+        case "checkbox":
+            ele.type = 'checkbox'
+            parent.appendChild(ele);
+            parent.appendChild(EleLable);
+
+            break;
+    
+        case "radio":
+            ele.type = 'radio'
+            ele.name = 'form'
+            parent.appendChild(ele);
+            parent.appendChild(EleLable);
+
+            break;
+    
+        default:
+            console.log("err")
+            break;
+    }
+}
+    else{
+        alert("Add Lable");
+    }
+
+})
+
+    
+</script>
+</body>
+</html>

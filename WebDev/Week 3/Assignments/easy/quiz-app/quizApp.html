@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz App</title>
+    <script type="module" src="index.js"></script>
+</head>
+
+<style>
+    body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f0f4f8;
+}
+
+.header {
+    background-color: #1e88e5;
+    color: white;
+    text-align: center;
+    padding: 15px;
+    margin: 0;
+    font-size: 24px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.quiz-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 50px;
+}
+
+.quiz-card {
+    background-color: white;
+    max-width: 350px;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.quiz-title {
+    text-align: center;
+    color: #37474f;
+    margin-bottom: 20px;
+}
+
+#question {
+    font-size: 18px;
+    color: #455a64;
+    margin-bottom: 20px;
+}
+
+.quiz-option {
+    margin-bottom: 15px;
+}
+
+.quiz-option input {
+    margin-right: 10px;
+}
+
+.quiz-option label {
+    font-size: 16px;
+    color: #546e7a;
+}
+
+.submit-btn {
+    background-color: #1e88e5;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    width: 100%;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+.submit-btn:hover {
+    background-color: #1565c0;
+}
+
+</style>
+<body>
+
+    <h1 class="header">QUIZ APP</h1>
+
+    <div class="quiz-container">
+        <div class="quiz-card">
+            <h2 class="quiz-title">Question</h2>
+
+            <p id="question">Which is the largest planet in our solar system?</p>
+
+            <form>
+                <div class="quiz-option">
+                    <input type="radio" value="a" name="quiz">
+                    <label id="a">Earth</label>
+                </div>
+
+                <div class="quiz-option">
+                    <input type="radio" value="b" name="quiz">
+                    <label id="b">Mars</label>
+                </div>
+
+                <div class="quiz-option">
+                    <input type="radio" value="c" name="quiz">
+                    <label id="c">Jupiter</label>
+                </div>
+
+                <div class="quiz-option">
+                    <input type="radio" value="d" name="quiz">
+                    <label id="d">Venus</label>
+                </div>
+
+                <button type="submit" class="submit-btn">Submit</button>
+            </form>
+        </div>
+    </div>
+
+</body>
+
+
+</html>

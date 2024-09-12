@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>bgColorChange</title>
+</head>
+<body style="background-color: white;">
+    <div style="display: flex; justify-content: center; ">
+        <button onclick="changeColor('violet')" style="background-color: violet; border-radius: 10px;
+        padding: 7px 20px; margin: 5px; border-style: none;">violet</button>
+        <button onclick="changeColor('indigo')" style="background-color: indigo; border-radius: 10px;
+        padding: 7px 20px; margin: 5px; border-style: none;">indigo</button>
+        <button onclick="changeColor('blue')" style="background-color: blue; border-radius: 10px;
+        padding: 7px 20px; margin: 5px; border-style: none;">blue</button>
+        <button onclick="changeColor('green')" style="background-color: green; border-radius: 10px;
+        padding: 7px 20px; margin: 5px; border-style: none;">green</button>
+        <button onclick="changeColor('yellow')" style="background-color: yellow; border-radius: 10px;
+        padding: 7px 20px; margin: 5px; border-style: none;">yellow</button>
+        <button onclick="changeColor('orange')" style="background-color: orange; border-radius: 10px;
+        padding: 7px 20px; margin: 5px; border-style: none;">orange</button>
+        <button onclick="changeColor('red')" style="background-color: red; border-radius: 10px;
+        padding: 7px 20px; margin: 5px; border-style: none;">Red</button>
+
+    <script>
+
+        function changeColor(color){
+            document.body.style.backgroundColor = color
+            console.log("Background Color Changed to", color);
+        }
+    </script>
+</body>
+</html>

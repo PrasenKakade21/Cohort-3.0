@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Taskify</title>
+    <style>
+        body {
+    font-family: Arial, sans-serif;
+    padding: 20px;
+    background-color: #f4f7f9;
+}
+
+.container {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.column {
+    width: 23%;
+    min-height: 300px;
+    padding: 20px;
+    border-radius: 5px;
+    background-color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.column h2 {
+    text-align: left;
+    font-size: 25px;
+    margin-bottom: 10px;
+    padding-bottom: 5px;
+    margin-top: 0px;
+    color: #234567;
+    border-bottom: 2px solid #e0e0e0;
+}
+
+.draggable-item {
+    width: 100%;
+    padding: 15px;
+    margin-bottom: 10px;
+    background-color: #e3e8ef;
+    color: #2d3a45;
+    text-align: left;
+    border-radius: 8px;
+    cursor: grab;
+    border: #d1d5db solid 1px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.05);
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.draggable-item:active {
+    cursor: grabbing;
+    transform: scale(1.03);
+}
+
+.item-title {
+    font-size: 1.2em;
+    margin-bottom: 8px;
+    color: #1f2937;
+}
+
+.item-description {
+    font-size: 0.9em;
+    margin-bottom: 12px;
+    color: #4b5563;
+}
+
+.item-tag {
+    display: inline-block;
+    padding: 5px 10px;
+    background-color: #cbd5e1;
+    border-radius: 15px;
+    font-size: 0.8em;
+    color: #1f2937;
+}
+
+.draggable-item:hover {
+    background-color: #c2d2e9;
+}
+
+.column.dragover {
+    border-color: #1c74d9;
+    background-color: #ebf3fc;
+}
+
+.add-todo {
+    width: 100%;
+    padding: 15px;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1px 15px;
+    background-color: #1c74d9;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.add-icon {
+    width: 18px;
+    height: 18px;
+}
+
+.add-todo:hover {
+    background-color: #155ba3;
+}
+
+.popup {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+}
+
+.popup-content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 5px;
+    width: 350px;
+    position: relative;
+    text-align: left;
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.1);
+}
+
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+    font-size: 20px;
+    color: red;
+}
+
+input[type="text"],
+textarea,
+select {
+    width: 100%;
+    padding: 10px;
+    margin: 8px 0;
+    border: 1px solid #d1d5db;
+    border-radius: 4px;
+    box-sizing: border-box;
+    background-color: #f1f5f9;
+    color: #1f2937;
+}
+
+button[type="submit"] {
+    padding: 10px;
+    background-color: #1c74d9;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+button[type="submit"]:hover {
+    background-color: #155ba3;
+}
+
+    </style>
+</head>
+
+<body>
+
+    <h1>Taskify</h1>
+    <div class="container">
+        <div class="column" id="column1">
+            <h2>To Do</h2>
+            <button class="add-todo" onclick="addTodo(1)">
+                <h4>Add Todo</h4>
+                <img src="https://cdn-icons-png.flaticon.com/512/748/748113.png" alt="Plus sign" class="add-icon">
+            </button>
+
+            <div class="draggable-item" draggable="true" id="item1">
+                <h2 class="item-title">Title</h2>
+                <p class="item-description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus, cupiditate.</p>
+                <span class="item-tag">Easy</span>
+            </div>
+
+        </div>
+
+        <div class="column" id="column2">
+            <h2>In Porgress</h2>
+            <button class="add-todo" onclick="addTodo(2)">
+                <h4>Add Todo</h4>
+                <img src="https://cdn-icons-png.flaticon.com/512/748/748113.png" alt="Plus sign" class="add-icon">
+            </button>
+            <div class="draggable-item" draggable="true" id="item4">
+                <h2 class="item-title">Title</h2>
+                <p class="item-description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat porro temporibus nemo at, aperiam rem animi maxime ab velit labore!</p>
+                <span class="item-tag">Medium</span>
+            </div>        </div>
+
+        <div class="column" id="column3">
+            <h2>Under Review</h2>
+            <button class="add-todo" onclick="addTodo(3)">
+                <h4>Add Todo</h4>
+                <img src="https://cdn-icons-png.flaticon.com/512/748/748113.png" alt="Plus sign" class="add-icon">
+            </button>
+            <div class="draggable-item" draggable="true" id="item2">
+                <h2 class="item-title">Title</h2>
+                <p class="item-description"> Lorem ipsum dolor sit amet.</p>
+                <span class="item-tag">Easy</span>
+            </div>        </div>
+
+        <div class="column" id="column4">
+            <h2>Finished</h2>
+            <button class="add-todo" onclick="addTodo(4)">
+                <h4>Add Todo</h4>
+                <img src="https://cdn-icons-png.flaticon.com/512/748/748113.png" alt="Plus sign" class="add-icon">
+            </button>
+            <div class="draggable-item" draggable="true" id="item3">
+                <h2 class="item-title">Title</h2>
+                <p class="item-description">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nostrum tenetur architecto fugit obcaecati voluptates rem, fugiat ullam culpa necessitatibus. Odio excepturi consequuntur hic porro magnam corrupti accusamus quisquam quidem, reprehenderit, iste temporibus dicta, illo quas nam? Reiciendis, consequatur sapiente? Molestiae incidunt repudiandae numquam. Hic, tempora ut. Voluptatibus fugit rem architecto!</p>
+                <span class="item-tag">Hard</span>
+            </div>
+        </div>
+    </div>
+    <div id="popup" class="popup">
+        <div class="popup-content">
+            <span class="close-btn" id="closePopupBtn">&times;</span>
+
+            <form id="popupForm">
+                <label for="titleInput">Title:</label>
+                <input type="text" id="titleInput" name="titleInput" placeholder="Enter Title" required>
+
+                <label for="descriptionInput">Description:</label>
+                <textarea id="descriptionInput" name="descriptionInput" placeholder="Enter Description"
+                    required></textarea>
+
+                <label for="type">Select Type:</label>
+                <select id="tagtype" name="type">
+                    <option value="Easy">Easy</option>
+                    <option value="Medium">Medium</option>
+                    <option value="Hard">Hard</option>
+                </select>
+
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        const draggables = document.querySelectorAll('.draggable-item');
+        const columns = document.querySelectorAll('.column');
+        let itemcount = 5;
+
+        draggables.forEach(item => {
+            setDraggables(item)
+        });
+        columns.forEach(item => {
+            setColumns(item)
+        });
+
+        function setDraggables(item) {
+            item.addEventListener('dragstart', function (event) {
+                event.dataTransfer.setData('text', event.target.id);
+                event.target.style.opacity = '0.5';
+            });
+
+            item.addEventListener('dragend', function (event) {
+                event.target.style.opacity = '1';
+            });
+        }
+        function setColumns(item) {
+            item.addEventListener('dragover', function (event) {
+                event.preventDefault();
+                item.classList.add('dragover');
+            });
+
+            item.addEventListener('dragleave', function () {
+                item.classList.remove('dragover');
+            });
+
+            item.addEventListener('drop', function (event) {
+                event.preventDefault();
+                const droppedItemId = event.dataTransfer.getData('text');
+                const droppedElement = document.getElementById(droppedItemId);
+                item.appendChild(droppedElement);
+                item.classList.remove('dragover');
+            });
+        }
+        function addTodo(col) {
+            column = document.getElementById("column" + col)
+            todo = gettodo(column);
+        }
+        function gettodo(parent) {
+            let tit = ""
+            let desp = ""
+            let t = ""
+            const popup = document.getElementById('popup');
+            const popupForm = document.getElementById('popupForm');
+            const titleInput = document.getElementById('titleInput');
+            const descriptionInput = document.getElementById('descriptionInput');
+            const closePopupBtn = document.getElementById('closePopupBtn');
+
+            popup.style.display = 'flex';
+            closePopupBtn.addEventListener('click', function () {
+                popup.style.display = 'none';
+            });
+
+            popupForm.addEventListener('submit', function (event) {
+                event.preventDefault();
+                tit = titleInput.value
+                desp = descriptionInput.value
+                t = document.getElementById('tagtype').value
+                popup.style.display = 'none';
+                createTodo(parent, tit, desp, t)
+            });
+        }
+
+        function createTodo(parent, title, desp, tag) {
+            const todo = document.createElement('div');
+            todo.classList.add('draggable-item');
+            todo.draggable = true;
+            todo.id = "item" + itemcount;
+            todo.innerHTML = `
+                <h2 class="item-title">${title}</h2>
+                <p class="item-description">${desp}</p>
+                <span class="item-tag">${tag}</span>
+            `;
+            itemcount++;
+            setDraggables(todo);
+            parent.appendChild(todo);
+        }
+    </script>
+</body>
+
+</html>

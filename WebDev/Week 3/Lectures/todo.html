@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width">
+	<title>replit</title>
+</head>
+
+<body>
+	<h1>Todo list</h1>
+	<ol id="todos">
+		<li>wake up</li>
+		<li>Take class </li>
+		<li>Go out to eat</li>
+	</ol>
+	<div>
+		<input id="add" type="text" placeholder="Enter Todo"></input>
+		<button onclick="addTodo()">Add Todo</button>
+	</div>
+	<br>
+	<div>
+
+		<input id="delete" type="text" placeholder="Todo Number"></input>
+		<button onclick="deleteTodo()">Delete Todo</button>
+	</div>
+
+
+	<script>
+		const ele = document.querySelector("li");
+		ele.innerHTML = "Sleep"
+		function addTodo() {
+			const content = document.getElementById("add").value;
+			console.log(content);
+		}
+		function deleteTodo() {
+			const i = document.getElementById("delete").value;
+			document.getElementById("todos").removeChild(document.querySelectorAll("li")[i - 1]);
+		}
+		function addTodo() {
+			const content = document.getElementById("add");
+			const textNode = document.createElement("li");
+			textNode.innerHTML = content.value;
+			const parent = document.getElementById("todos");
+			parent.appendChild(textNode);
+		}
+	</script>
+</body>
+
+</html>
