@@ -11,7 +11,7 @@ const {z} = require("zod");
 // database
 const { UserModel,TodoModel} = require("./db");
 const mongoose = require("mongoose");
-mongoose.connect("mongodb+srv://prasen:prasen@cluster0.gtthp.mongodb.net/Todo_App")
+mongoose.connect("")
 
 
 app.use(express.json());
