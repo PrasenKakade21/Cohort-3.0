@@ -1,0 +1,19 @@
+node.js 
+js runtime uses google's V8
+
+bun
+new js runtime , faster
+
+npm - node package manager 
+
+npm init -y (create starting file package.json)
+
+package.json - has info about all the imported packages and dev dependicies and lots of other things
+
+package-lock.json - locks version of dependicies
+
+npm i chalk - install chalk and adds to the project and updates package.json
+
+
+using mjs as chalk uses higher level js
+import chalk form "chalk" // modern import syntax

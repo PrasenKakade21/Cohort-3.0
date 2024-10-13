@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signup and Login</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.7.7/axios.min.js"></script>
+</head>
+
+<body>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            height: 100vh;
+        }
+
+        .container {
+            width: 300px;
+            background-color: white;
+            padding: 20px;
+            margin: 15px 0;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        #form-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            margin-top: 10px;
+            background-color: #1166e6;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #1166e6;
+        }
+
+        #information {
+            padding: 10px;
+            margin-bottom: 20px;
+            background-color: #e9ecef;
+            border-radius: 5px;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .logout-container {
+            margin-top: auto;
+        }
+    </style>
+   
+    <div class="container">
+        <h2>User Information</h2>
+        <div id="information">No user signed in</div>
+    </div>
+
+    <div id="form-container" class="container">
+        <div id="signup-form">
+            <h2>Signup</h2>
+            <input id="signup-username" type="text" name="username" placeholder="Username">
+            <input id="signup-password" type="password" name="password" placeholder="Password">
+            <button onclick="signup()">Submit</button>
+            <button onclick="toggleForms()">SignIn</button>
+        </div>
+
+        <div id="signin-form" class="hidden">
+            <h2>Signin</h2>
+            <input id="signin-username" type="text" name="username" placeholder="Username">
+            <input id="signin-password" type="password" name="password" placeholder="Password">
+            <button onclick="signin()">Submit</button>
+            <button onclick="toggleForms()">SignUp</button>
+        </div>
+    </div>
+
+    <div id="logout" class="container logout-container">
+        <button onclick="logout()">Logout</button>
+    </div>
+    <script>
+        getUserInformation();
+        async function signup() {
+            const username = document.getElementById("signup-username").value;
+            const password = document.getElementById("signup-password").value;
+
+            const response = await axios.post("http://localhost:3000/signup", {
+                username: username,
+                password: password
+            })
+            toggleForms()
+            alert("Signed up successfully");
+        }
+        async function signin() {
+            const username = document.getElementById("signin-username").value;
+            const password = document.getElementById("signin-password").value;
+
+            const response = await axios.post("http://localhost:3000/signin", {
+                username: username,
+                password: password
+            });
+
+            localStorage.setItem("token", response.data.token);
+
+            alert("Signed in successfully");
+            getUserInformation();
+        }
+        async function getUserInformation() {
+            const token = localStorage.getItem("token");
+            const LogoutBtn = document.getElementById('logout');
+
+            if (token) {
+                const response = await axios.get("http://localhost:3000/me", {
+                    headers: {
+                        Authorization: token
+                    }
+                });
+                document.getElementById("information").innerHTML = response.data.username;
+
+                if (LogoutBtn.classList.contains('hidden')) {
+                    LogoutBtn.classList.remove('hidden');
+                } 
+            }else {
+                    LogoutBtn.classList.add('hidden');
+                }
+            
+        }
+
+        async function logout() {
+            if (localStorage.token) {
+                localStorage.removeItem("token");
+                location.reload();
+            }
+        }
+        function toggleForms() {
+            const signupForm = document.getElementById('signup-form');
+            const signinForm = document.getElementById('signin-form');
+
+            if (signupForm.classList.contains('hidden')) {
+                signupForm.classList.remove('hidden');
+                signinForm.classList.add('hidden');
+            } else {
+                signupForm.classList.add('hidden');
+                signinForm.classList.remove('hidden');
+            }
+        }
+    </script>
+
+</body>
+
+</html>
